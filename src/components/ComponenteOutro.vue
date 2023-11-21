@@ -2,10 +2,16 @@
   <div class="container">
     <div class="eventos">
       <h2>Eventos Recebidos:</h2>
-      <div v-for="(evento, index) in eventos" :key="index" class="evento" :style="{ background: evento.cor }">
+      <div
+        v-for="(evento, index) in eventos"
+        :key="index"
+        class="evento"
+        :style="{ background: evento.cor }"
+      >
         <strong>Data do Evento:</strong> {{ evento.data }}
         <br />
         <strong>Categoria:</strong> {{ evento.categoria }}
+        <strong>Descrição:</strong> {{ evento.descricao }}
         <hr />
       </div>
     </div>
@@ -24,6 +30,9 @@ export default {
 </script>
 
 <style scoped>
+*{
+    color: black;
+}
 .container {
   display: flex;
 }
@@ -38,5 +47,4 @@ export default {
   padding: 10px;
   border-radius: 4px;
 }
-
 </style>
