@@ -2,15 +2,15 @@
   <div class="container">
     <div class="formulario">
       <h2>Criação de tarefa</h2>
-      <form @submit.prevent="enviarFormulario">
+      <form @submit.prevent="submit">
         <div class="first-component">
           <div class="campo-formulario">
             <label for="nome">Nome do Evento:</label>
-            <input type="text" id="nome" v-model="evento.nome" required />
+            <input type="text" id="nome" v-model="form.nome" required />
           </div>
           <div class="campo-formulario">
             <label for="data">Data do Evento:</label>
-            <input type="date" id="data" v-model="evento.data" required />
+            <input type="date" id="data" v-model="form.data" required />
           </div>
         </div>
         <div class="second-component">
@@ -19,13 +19,13 @@
             <input
               type="text"
               id="categoria"
-              v-model="evento.categoria"
+              v-model="form.categoria"
               required
             />
           </div>
           <div class="campo-formulario">
             <label for="cor">Cor:</label>
-            <select id="cor" v-model="evento.cor" required>
+            <select id="cor" v-model="form.cor" required>
               <option value="vermelho">Vermelho</option>
               <option value="azul">Azul</option>
               <option value="verde">Verde</option>
@@ -39,7 +39,7 @@
             <input
               type="text"
               id="descricao"
-              v-model="evento.descricao"
+              v-model="form.descricao"
               required
             />
           </div>
@@ -56,31 +56,20 @@
 export default {
   data() {
     return {
-      evento: {
+      form: {
         nome: "",
         data: "",
         categoria: "",
         cor: "",
+        descricao: "",
       },
-    };
+    }
   },
   methods: {
-    enviarFormulario() {
-     this.$emit('enviarDados', this.evento);
-      
-      // Restante do código para download do JSON (se necessário)
-      const dadosJSON = JSON.stringify(this.evento, null, 2);
-      const blob = new Blob([dadosJSON], { type: 'application/json' });
-      const link = document.createElement('a');
-      link.href = window.URL.createObjectURL(blob);
-      link.download = 'dados_evento.json';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-
-      console.log('Enviando dados:', this.evento);
-    },
-  },
+    async submit() {
+      this.$emit('submit', this.form)
+    }
+  }
 };
 </script>
 
@@ -122,8 +111,7 @@ select {
   border-radius: 4px;
   background-color: white;
 }
-#cor {
-}
+
 button {
   background-color: #3498db;
   color: #fff;
