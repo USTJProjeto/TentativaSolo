@@ -3,23 +3,27 @@
     <div class="eventos">
       <h2>Eventos Recebidos:</h2>
       <button @click="fetchData">Ver Tarefas</button>
-      <div v-for="tarefa in responseData">
-        <div class="card">
-          <div class="cont card-top">
-            <div class="card-nome">
-              <p>{{ tarefa.nome }}</p>
-            </div>
-            <div class="card-data">
-              <p>{{ tarefa.data }}</p>
-            </div>
-          </div>
-          <div class="cont card-bottom">
-            <div class="card-descricao">
-              <p>{{ tarefa.descricao }}</p>
-            </div>
-            <div class="card-cor">
-              <p>{{ tarefa.cor }}</p>
-            </div>
+      <div class="container-card">
+        <div v-for="tarefa in responseData">
+          <div class="card">
+              <div class="card-inside">
+                <div class="cont card-top">
+                  <div class="card-nome">
+                    <p>{{ tarefa.nome }}</p>
+                  </div>
+                  <div class="card-data">
+                    <p>{{ tarefa.data }}</p>
+                  </div>
+                </div>
+                <div class="cont card-bottom">
+                  <div class="card-descricao">
+                    <p>{{ tarefa.descricao }}</p>
+                  </div>
+                  <div class="card-cor">
+                    <p>{{ tarefa.cor }}</p>
+                  </div>
+                </div>
+              </div>
           </div>
         </div>
       </div>
@@ -54,9 +58,19 @@ export default {
 </script>
 
 <style scoped>
+.card-inside{
+    background-color: white;
+    border-radius: 0.8em;
+}
+.container-card {
+  display: grid;
+  column-gap: 0.8em;
+  row-gap: 0.8em;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 0.8em;
+}
 .card {
   background-color: #ff3366;
-  margin: 0.8em;
   border-radius: 0.8em;
 }
 .card-top,
@@ -66,10 +80,12 @@ export default {
   gap: 1.2rem;
 }
 .cont p {
-  background-color: white;
+  background-color: #ff3366;
   padding: 0.1em;
   border-radius: 0.4em;
-
+  color: white;
+  font-weight: 700;
+  padding: 0.2em;
 }
 
 * {

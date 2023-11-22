@@ -88,7 +88,7 @@ h2 {
 }
 
 .formulario {
-  width: 40em;
+  width: 100%;
   height: 25em;
   padding: 20px;
   background-color: #ff3366;
