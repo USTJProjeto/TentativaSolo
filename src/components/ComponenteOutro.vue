@@ -2,36 +2,39 @@
   <div class="container">
     <div class="eventos">
       <h2>Eventos Recebidos:</h2>
-      <div
-        v-for="(evento, index) in eventos"
-        :key="index"
-        class="evento"
-        :style="{ background: evento.cor }"
-      >
-        <strong>Data do Evento:</strong> {{ evento.data }}
-        <br />
-        <strong>Categoria:</strong> {{ evento.categoria }}
-        <strong>Descrição:</strong> {{ evento.descricao }}
-        <hr />
-      </div>
+      <button @click="getTarefas">tesqte</button>
+      <div>{{ message }}</div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: {
-    eventos: {
-      type: Array,
-      default: () => [],
+  data() {
+    return {
+      message: [],
+    };
+  },
+  methods: {
+    async getTarefas() {
+      try {
+        const response = await fetch("http://localhost:4000/get/tarefas");
+        this.message = await response.json();
+        console.log(this.message);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    mounted() {
+      this.getTarefas();
     },
   },
 };
 </script>
 
 <style scoped>
-*{
-    color: black;
+* {
+  color: black;
 }
 .container {
   display: flex;
@@ -46,5 +49,11 @@ export default {
   margin-bottom: 15px;
   padding: 10px;
   border-radius: 4px;
+}
+.tes {
+  background-color: red;
+}
+button {
+  color: white;
 }
 </style>

@@ -2,15 +2,15 @@
   <div class="container">
     <div class="formulario">
       <h2>Criação de tarefa</h2>
-      <form @submit.prevent="submit">
+      <form method="post" action="http://localhost:4000/post/tarefas">
         <div class="first-component">
           <div class="campo-formulario">
             <label for="nome">Nome do Evento:</label>
-            <input type="text" id="nome" v-model="form.nome" required />
+            <input type="text" name="nome" v-model="form.nome" required />
           </div>
           <div class="campo-formulario">
             <label for="data">Data do Evento:</label>
-            <input type="date" id="data" v-model="form.data" required />
+            <input type="date" name="data" v-model="form.data" required />
           </div>
         </div>
         <div class="second-component">
@@ -18,14 +18,14 @@
             <label for="categoria">Categoria:</label>
             <input
               type="text"
-              id="categoria"
+              name="categoria"
               v-model="form.categoria"
               required
             />
           </div>
           <div class="campo-formulario">
             <label for="cor">Cor:</label>
-            <select id="cor" v-model="form.cor" required>
+            <select name="cor" v-model="form.cor" required>
               <option value="vermelho">Vermelho</option>
               <option value="azul">Azul</option>
               <option value="verde">Verde</option>
@@ -38,7 +38,7 @@
             <label for="categoria">Descrição:</label>
             <input
               type="text"
-              id="descricao"
+              name="descricao"
               v-model="form.descricao"
               required
             />
@@ -63,13 +63,13 @@ export default {
         cor: "",
         descricao: "",
       },
-    }
+    };
   },
   methods: {
     async submit() {
-      this.$emit('submit', this.form)
-    }
-  }
+      this.$emit("submit", this.form);
+    },
+  },
 };
 </script>
 
