@@ -66,7 +66,19 @@ export default {
   },
   methods: {
     enviarFormulario() {
-      this.$emit("enviarDados", this.evento);
+     this.$emit('enviarDados', this.evento);
+      
+      // Restante do código para download do JSON (se necessário)
+      const dadosJSON = JSON.stringify(this.evento, null, 2);
+      const blob = new Blob([dadosJSON], { type: 'application/json' });
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.download = 'dados_evento.json';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      console.log('Enviando dados:', this.evento);
     },
   },
 };
