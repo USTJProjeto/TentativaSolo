@@ -1,8 +1,6 @@
 <template>
   <header class="custom-header">
-    <nav>
-      <a class="nav-link">Criar Tarefa</a>
-    </nav>
+    <img src="../assets/logo.svg" />
   </header>
 </template>
 
@@ -13,10 +11,15 @@ export default {
 </script>
 
 <style scoped>
-.custom-header {
-  background-color: #ff66b2; /* Cor rosa */
-  height: 100px;
-  padding: 10px;
+header {
+  margin: 0 auto;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+header img {
 }
 
 .nav-link {

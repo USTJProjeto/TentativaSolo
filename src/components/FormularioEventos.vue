@@ -74,6 +74,9 @@ export default {
 </script>
 
 <style scoped>
+label {
+  font-weight: 700;
+}
 h2 {
   color: white;
 }
@@ -86,7 +89,7 @@ h2 {
 
 .formulario {
   width: 40em;
-  margin: auto;
+  height: 25em;
   padding: 20px;
   background-color: #ff3366;
   border-radius: 8px;

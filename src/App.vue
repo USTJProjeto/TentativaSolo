@@ -1,4 +1,7 @@
 <template>
+    <header>
+        <Header/>
+    </header>
   <div id="main">
     <FormularioEvento @enviarDados="receberDados" />
     <ComponenteOutro :eventos="listaEventos" />
