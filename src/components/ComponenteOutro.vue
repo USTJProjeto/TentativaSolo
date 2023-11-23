@@ -3,30 +3,22 @@
     <div class="eventos">
       <h2>Eventos Recebidos:</h2>
       <button @click="fetchData">Ver Tarefas</button>
-      <div class="container-card">
-        <div v-for="tarefa in responseData">
-          <div class="card">
-              <div class="card-inside">
-                <div class="cont card-top">
-                  <div class="card-nome">
-                    <p>{{ tarefa.nome }}</p>
-                  </div>
-                  <div class="card-data">
-                    <p>{{ tarefa.data }}</p>
-                  </div>
-                </div>
-                <div class="cont card-bottom">
-                  <div class="card-descricao">
-                    <p>{{ tarefa.descricao }}</p>
-                  </div>
-                  <div class="card-cor">
-                    <p>{{ tarefa.cor }}</p>
-                  </div>
-                </div>
-              </div>
-          </div>
-        </div>
-      </div>
+      <table class="table">
+        <thead>
+          <th>Tarefa</th>
+          <th>Data</th>
+          <th>Categoria</th>
+          <th>Descrição</th>
+        </thead>
+        <tbody>
+          <tr v-for="tarefa in responseData">
+            <td>{{ tarefa.nome }}</td>
+            <td>{{ tarefa.data }}</td>
+            <td>{{ tarefa.categoria }}</td>
+            <td>{{ tarefa.descricao }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
@@ -58,34 +50,13 @@ export default {
 </script>
 
 <style scoped>
-.card-inside{
-    background-color: white;
-    border-radius: 0.8em;
+table {
+  background-color: red;
 }
-.container-card {
-  display: grid;
-  column-gap: 0.8em;
-  row-gap: 0.8em;
-  grid-template-columns: 1fr 1fr;
-  margin-top: 0.8em;
+th {
+  text-align: center;
 }
-.card {
-  background-color: #ff3366;
-  border-radius: 0.8em;
-}
-.card-top,
-.card-bottom {
-  display: flex;
-  flex-direction: row;
-  gap: 1.2rem;
-}
-.cont p {
-  background-color: #ff3366;
-  padding: 0.1em;
-  border-radius: 0.4em;
-  color: white;
-  font-weight: 700;
-  padding: 0.2em;
+td {
 }
 
 * {
