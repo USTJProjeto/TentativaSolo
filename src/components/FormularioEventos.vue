@@ -15,7 +15,7 @@
         </div>
         <div class="second-component">
           <div class="campo-formulario">
-            <label for="categoria">Categoria:</label>
+        <label for="categoria">Categoria:</label>
             <input
               type="text"
               name="categoria"
@@ -25,13 +25,22 @@
           </div>
           <div class="campo-formulario">
             <label for="cor">Cor:</label>
-            <select name="cor" v-model="form.cor" required>
-              <option value="vermelho">Vermelho</option>
-              <option value="azul">Azul</option>
-              <option value="verde">Verde</option>
-              <option value="amarelo">Amarelo</option>
-            </select>
-          </div>
+            <div class="q-gutter-md row items-start">
+              <q-input
+                filled
+                v-model="color"
+                class="my-input"
+                >
+                <template v-slot:append>
+                  <q-icon name="colorize" class="cursor-pointer">
+                    <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                      <q-color v-model="color" />
+                    </q-popup-proxy>
+                  </q-icon>
+                </template>
+              </q-input>
+
+            </div>
         </div>
         <div class="third-component">
           <div class="campo-formulario">
@@ -74,6 +83,9 @@ export default {
 </script>
 
 <style scoped>
+.my-input {
+  max-width: 250px;
+}
 label {
   font-weight: 700;
 }
