@@ -1,24 +1,32 @@
 <template>
   <div class="container">
     <div class="eventos">
-      <h2>Eventos Recebidos:</h2>
+      <h2>Tarefas</h2>
       <button @click="fetchData">Ver Tarefas</button>
-      <table class="table">
-        <thead>
-          <th>Tarefa</th>
-          <th>Data</th>
-          <th>Categoria</th>
-          <th>Descrição</th>
-        </thead>
-        <tbody>
-          <tr v-for="tarefa in responseData">
-            <td>{{ tarefa.nome }}</td>
-            <td>{{ tarefa.data }}</td>
-            <td>{{ tarefa.categoria }}</td>
-            <td>{{ tarefa.descricao }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="container-table">
+        <table class="table">
+          <thead>
+            <th>Tarefa</th>
+            <th>Data</th>
+            <th>Categoria</th>
+            <th>Descrição</th>
+          </thead>
+          <tbody>
+            <tr v-for="tarefa in responseData">
+              <td>{{ tarefa.nome }}</td>
+              <td>{{ tarefa.data }}</td>
+              <td class="td-cor">
+                <span class="badge" :style="{ backgroundColor: tarefa.cor }">{{
+                  tarefa.categoria
+                }}</span>
+              </td>
+              <td>
+                {{ tarefa.descricao }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
@@ -50,15 +58,38 @@ export default {
 </script>
 
 <style scoped>
+.badge {
+  color: white;
+  padding: 4px 8px;
+  text-align: center;
+  border-radius: 5px;
+}
+* {
+  scroll-behavior: smooth;
+}
+.container-table {
+  margin: 0.8em 0;
+}
+tr:nth-child(even) {
+  background-color: #bababa;
+}
 table {
-  background-color: red;
+  margin: 0 auto;
+  min-width: 1280px;
+  padding: 10px;
+  border-collapse: collapse;
 }
 th {
   text-align: center;
+  background-color: #333333;
+  color: white;
+  font-weight: 600;
+  font-size: 1.4em;
 }
 td {
+  text-align: center;
+  padding: 0.5em;
 }
-
 * {
   color: black;
 }

@@ -15,7 +15,7 @@
         </div>
         <div class="second-component">
           <div class="campo-formulario">
-        <label for="categoria">Categoria:</label>
+            <label for="categoria">Categoria:</label>
             <input
               type="text"
               name="categoria"
@@ -25,22 +25,14 @@
           </div>
           <div class="campo-formulario">
             <label for="cor">Cor:</label>
-            <div class="q-gutter-md row items-start">
-              <q-input
-                filled
-                v-model="color"
-                class="my-input"
-                >
-                <template v-slot:append>
-                  <q-icon name="colorize" class="cursor-pointer">
-                    <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-                      <q-color v-model="color" />
-                    </q-popup-proxy>
-                  </q-icon>
-                </template>
-              </q-input>
-
-            </div>
+            <input
+              class="input-color"
+              type="color"
+              id="head"
+              name="cor"
+              value="#e66465"
+            />
+          </div>
         </div>
         <div class="third-component">
           <div class="campo-formulario">
@@ -83,8 +75,12 @@ export default {
 </script>
 
 <style scoped>
-.my-input {
-  max-width: 250px;
+.botao-enviar{
+    background-color: #FF3366;
+}
+.input-color {
+  height: 35px;
+  width: 35px !important;
 }
 label {
   font-weight: 700;
@@ -100,12 +96,16 @@ h2 {
 }
 
 .formulario {
-  width: 100%;
-  height: 25em;
-  padding: 20px;
-  background-color: #ff3366;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: 25em;
+    padding: 20px;
+    background-color: #333333;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .campo-formulario {
@@ -115,11 +115,12 @@ h2 {
 label {
   display: block;
   margin-bottom: 5px;
+  color: white;
 }
 
 input,
 select {
-  min-width: 100px;
+  min-width: 400px;
   padding: 8px;
   box-sizing: border-box;
   border: 1px solid #ccc;
