@@ -12,24 +12,28 @@
           <span class="close">&times;</span>
           <div class="modal-form-container">
             <form method="post" :action="formSubmit">
-              <select name="sel-tarefa" v-model="selectedTarefaId" id="tar">
-                <option
-                  v-for="tarefa in tarefaData"
-                  :key="tarefa.id"
-                  :value="tarefa.id"
-                >
-                  {{ tarefa.tarefa.nome }}
-                  {{ tarefa.id }}
-                </option>
-              </select>
-              <label>Anotacão</label>
-              <input
-                type="anotacao"
-                name="anotacao"
-                v-model="anotacao"
-                required
-              />
-              <button type="submit" class="botao-enviar">Criar Anotação</button>
+              <div class="frex">
+                <select name="sel-tarefa" v-model="selectedTarefaId" id="tar">
+                  <option
+                    v-for="tarefa in tarefaData"
+                    :key="tarefa.id"
+                    :value="tarefa.id"
+                  >
+                    {{ tarefa.tarefa.nome }}
+                    {{ tarefa.id }}
+                  </option>
+                </select>
+                <label>Anotacão</label>
+                <input
+                  type="anotacao"
+                  name="anotacao"
+                  v-model="anotacao"
+                  required
+                />
+                <button type="submit" class="botao-enviar-anotacao">
+                  Criar Anotação
+                </button>
+              </div>
             </form>
           </div>
         </div>
@@ -119,6 +123,27 @@ export default {
 </script>
 
 <style scoped>
+.botao-enviar-anotacao {
+  margin-top: 10px;
+  background-color: pink;
+}
+.modal-form-container {
+  display: flex;
+  justify-content: center;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+  justify-content: center;
+  align-items: center;
+}
+form input {
+}
+form input,
+select {
+  background-color: white;
+}
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
@@ -140,7 +165,8 @@ export default {
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 40%;
+  border-radius: 0.8em;
 }
 
 /* The Close Button */
