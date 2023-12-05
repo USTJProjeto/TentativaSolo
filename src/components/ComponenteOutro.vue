@@ -9,10 +9,10 @@
             <th>Tarefa</th>
             <th>Data</th>
             <th>Categoria</th>
-            <th>Descrição</th>
+            <th>Anotação</th>
           </thead>
           <tbody>
-            <tr v-for="tarefa in responseData">
+            <tr v-for="tarefa in tarefaData">
               <td>{{ tarefa.tarefa.nome }}</td>
               <td>{{ tarefa.tarefa.data }}</td>
               <td class="td-cor">
@@ -39,7 +39,8 @@ import axios from "axios";
 export default {
   data() {
     return {
-      responseData: null,
+      tarefaData: null,
+      anotacaoData: null,
       dataLoaded: false,
     };
   },
@@ -48,8 +49,25 @@ export default {
       axios
         .get("http://localhost:4000/get/tarefas")
         .then((response) => {
-          this.responseData = response.data;
+          this.tarefaData = response.data;
+          this.dataLoaded = false;
+
+          // Use Promise.all to handle multiple asynchronous requests
+          const requests = this.tarefaData.map((tarefa) => {
+            return axios.get(
+              `http://localhost:5000/get/tarefas/${tarefa.id}/anotacoes`
+            );
+          });
+
+          return Promise.all(requests);
+        })
+        .then((anotacoesResponses) => {
+          // Handle responses for each anotacoes request
+          this.anotacaoData = anotacoesResponses.map(
+            (response) => response.data
+          );
           this.dataLoaded = true;
+          console.log(this.anotacaoData);
         })
         .catch((error) => {
           console.error("Error fetching data:", error);
