@@ -13,15 +13,17 @@
           </thead>
           <tbody>
             <tr v-for="tarefa in responseData">
-              <td>{{ tarefa.nome }}</td>
-              <td>{{ tarefa.data }}</td>
+              <td>{{ tarefa.tarefa.nome }}</td>
+              <td>{{ tarefa.tarefa.data }}</td>
               <td class="td-cor">
-                <span class="badge" :style="{ backgroundColor: tarefa.cor }">{{
-                  tarefa.categoria
-                }}</span>
+                <span
+                  class="badge"
+                  :style="{ backgroundColor: tarefa.tarefa.cor }"
+                  >{{ tarefa.tarefa.categoria }}</span
+                >
               </td>
               <td>
-                {{ tarefa.descricao }}
+                {{ tarefa.tarefa.descricao }}
               </td>
             </tr>
           </tbody>
