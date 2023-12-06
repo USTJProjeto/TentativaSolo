@@ -1,8 +1,12 @@
 <template>
   <div class="container">
     <div class="formulario">
-      <h2>Criação de tarefa</h2>
-      <form method="post" action="http://localhost:4000/post/tarefas">
+      <form
+        method="post"
+        onsubmit="event.preventDefault()"
+        action="http://localhost:4000/post/tarefas"
+      >
+        <h2>Criação de tarefa</h2>
         <div class="first-component">
           <div class="campo-formulario">
             <label for="nome">Nome do Evento:</label>
@@ -49,6 +53,35 @@
           <button type="submit" class="botao-enviar">Criar</button>
         </div>
       </form>
+      <form method="post" action="http://localhost:5000/post/lembrete">
+        <h2>Lembrete Diário</h2>
+        <div class="first-component">
+          <div class="campo-formulario">
+            <label for="nome">Lembrete Diário:</label>
+            <input
+              type="text"
+              name="lembrete"
+              v-model="form.lembrete"
+              required
+            />
+          </div>
+        </div>
+        <div class="second-component">
+          <div class="campo-formulario">
+            <label for="cor">Cor:</label>
+            <input
+              class="input-color"
+              type="color"
+              id="head"
+              name="cor"
+              value="#e66465"
+            />
+          </div>
+        </div>
+        <div class="button-component">
+          <button type="submit" class="botao-enviar">Criar Lembrete</button>
+        </div>
+      </form>
     </div>
   </div>
 </template>
@@ -75,8 +108,8 @@ export default {
 </script>
 
 <style scoped>
-.botao-enviar{
-    background-color: #FF3366;
+.botao-enviar {
+  background-color: #ff3366;
 }
 .input-color {
   height: 35px;
@@ -96,16 +129,19 @@ h2 {
 }
 
 .formulario {
-    width: 100%;
-    height: 25em;
-    padding: 20px;
-    background-color: #333333;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  height: 25em;
+  padding: 20px;
+  background-color: #333333;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+form {
+  height: 75%;
 }
 
 .campo-formulario {
@@ -120,7 +156,7 @@ label {
 
 input,
 select {
-  min-width: 400px;
+  min-width: 150px;
   padding: 8px;
   box-sizing: border-box;
   border: 1px solid #ccc;

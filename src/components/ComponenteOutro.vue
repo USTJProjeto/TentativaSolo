@@ -4,37 +4,26 @@
       <h2>Tarefas</h2>
       <div class="btn-ctn">
         <button @click="fetchData">Ver Tarefas</button>
-        <button id="myBtn" @click="btnClick">Adicionar anotação</button>
+        <button id="myBtn" @click="btnClick">Ver Lembretes</button>
       </div>
       <div id="myModal" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
-          <span class="close">&times;</span>
+          <span @click="spanClick" class="close">&times;</span>
           <div class="modal-form-container">
-            <form method="post" :action="formSubmit">
-              <div class="frex">
-                <select name="sel-tarefa" v-model="selectedTarefaId" id="tar">
-                  <option
-                    v-for="tarefa in tarefaData"
-                    :key="tarefa.id"
-                    :value="tarefa.id"
-                  >
-                    {{ tarefa.tarefa.nome }}
-                    {{ tarefa.id }}
-                  </option>
-                </select>
-                <label>Anotacão</label>
-                <input
-                  type="anotacao"
-                  name="anotacao"
-                  v-model="anotacao"
-                  required
-                />
-                <button type="submit" class="botao-enviar-anotacao">
-                  Criar Anotação
-                </button>
+            <div class="frex">
+              <h2>Lembretes Diários</h2>
+              <button @click="fetchTwoData">Reload</button>
+              <div class="container-p-for">
+                <p
+                  class="badge"
+                  :style="{ backgroundColor: lembrete.lembrete.cor }"
+                  v-for="lembrete in lembreteData"
+                >
+                  {{ lembrete.lembrete.lembrete }} #{{ lembrete.id }}
+                </p>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
@@ -44,7 +33,7 @@
             <th>Tarefa</th>
             <th>Data</th>
             <th>Categoria</th>
-            <th>Anotação</th>
+            <th>Descrição</th>
           </thead>
           <tbody>
             <tr v-for="tarefa in tarefaData">
@@ -57,10 +46,7 @@
                   >{{ tarefa.tarefa.categoria }}</span
                 >
               </td>
-              <td>{{ tarefa.id }}</td>
-              <!-- <td v-for="anotacao in anotacaoData"> -->
-              <!--     a -->
-              <!-- </td> -->
+              <td>{{ tarefa.tarefa.categoria }}</td>
             </tr>
           </tbody>
         </table>
@@ -75,16 +61,10 @@ export default {
   data() {
     return {
       tarefaData: null,
-      anotacaoData: null,
+      lembreteData: null,
       dataLoaded: false,
       selectedTarefaId: null,
     };
-  },
-  computed: {
-    formSubmit() {
-      console.log(this.selectedTarefaId);
-      return this.selectedTarefaId;
-    },
   },
   methods: {
     btnClick() {
@@ -93,36 +73,53 @@ export default {
       var span = document.getElementsByClassName("close")[0];
       modal.style.display = "block";
     },
+    spanClick() {
+      var modal = document.getElementById("myModal");
+      var btn = document.getElementById("myBtn");
+      var span = document.getElementsByClassName("close")[0];
+      modal.style.display = "none";
+    },
+    windowClick() {
+      if (event.target == modal) {
+        modal.style.display = none;
+      }
+    },
     fetchData() {
       axios
         .get("http://localhost:4000/get/tarefas")
         .then((response) => {
           this.tarefaData = response.data;
           this.dataLoaded = false;
-
-          const requests = this.tarefaData.map((tarefa) => {
-            return axios.get(
-              `http://localhost:5000/get/tarefas/{this.selectedTarefaId}/anotacoes`
-            );
-          });
-
-          return Promise.all(requests);
         })
-        .then((anotacoesResponses) => {
-          this.anotacaoData = anotacoesResponses.map(
-            (response) => response.data
-          );
-          this.dataLoaded = true;
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
+    },
+    fetchTwoData() {
+      axios
+        .get("http://localhost:5000/get/lembrete")
+        .then((response) => {
+          this.lembreteData = response.data;
+          this.dataLoaded = false;
+          console.log(lembreteData);
         })
         .catch((error) => {
           console.error("Error fetching data:", error);
         });
     },
   },
+  mounted() {
+    this.fetchTwoData();
+    this.fetchData();
+  },
 };
 </script>
 
 <style scoped>
+.container-p-for {
+  display: flex;
+  flex-direction: column;
+}
 .botao-enviar-anotacao {
   margin-top: 10px;
   background-color: pink;
